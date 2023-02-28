@@ -172,12 +172,11 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     framingAssistantVM.RAHours = RAh;
                     framingAssistantVM.RAMinutes = RAm;
                     framingAssistantVM.RASeconds = RAs;
+
                     framingAssistantVM.DecDegrees = DECd;
                     framingAssistantVM.DecMinutes = DECm;
-                    framingAssistantVM.DecSeconds = DECs;     
+                    framingAssistantVM.DecSeconds = DECs;                     
                     
-                    
-
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "ShootOK/" + fileName, namech);
