@@ -165,14 +165,14 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     int RAm = int.Parse(param[5]);
                     double RAs = double.Parse(param[6]);
 
-                    int DECh = int.Parse(param[7]);
+                    int DECd = int.Parse(param[7]);
                     int DECm = int.Parse(param[8]);
                     double DECs = double.Parse(param[9]);
                     
                     framingAssistantVM.RAHours = RAh;
                     framingAssistantVM.RAMinutes = RAm;
                     framingAssistantVM.RASeconds = RAs;
-                    framingAssistantVM.DecDegrees = DECh;
+                    framingAssistantVM.DecDegrees = DECd;
                     framingAssistantVM.DecMinutes = DECm;
                     framingAssistantVM.DecSeconds = DECs;     
                     
