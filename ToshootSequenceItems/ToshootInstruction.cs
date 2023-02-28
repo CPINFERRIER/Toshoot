@@ -33,6 +33,11 @@ using NINA.Sequencer.SequenceItem.Imaging;
 using NINA.Sequencer.Utility;
 using System.IO;
 using System.Windows.Controls;
+using System.Xml.Linq;
+using NINA.Equipment.Equipment.MyCamera;
+using NINA.WPF.Base.SkySurvey;
+using System.Security.Cryptography;
+
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -53,6 +58,9 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class ToshootInstruction : SequenceItem {
+        private  IFramingAssistantVM framingAssistantVM;
+        
+
         /// <summary>
         /// The constructor marked with [ImportingConstructor] will be used to import and construct the object
         /// General device interfaces can be added to the constructor parameters and will be automatically injected on instantiation by the plugin loader
@@ -84,10 +92,11 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         ///     - IList<IDateTimeProvider>
         /// </remarks>
         [ImportingConstructor]
-        public ToshootInstruction() {            
+        public ToshootInstruction(IFramingAssistantVM framingAssistantVM) {
+            this.framingAssistantVM = framingAssistantVM;
             Text = Settings.Default.DefaultNotificationMessage;            
         }
-        public ToshootInstruction(ToshootInstruction copyMe) : this() {
+        public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM) {
             CopyMetaData(copyMe);
         }
 
@@ -99,6 +108,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         /// </remarks>
         [JsonProperty]
         public string Text { get; set; }
+        
 
         /// <summary>
         /// The core logic when the sequence item is running resides here
@@ -150,12 +160,23 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     // Écrire les mots dans les variables
                     string namech = param[0];
-                    string RAh = param[4];
-                    string RAm = param[5];
-                    string RAs = param[6];
-                    string DECh = param[7];
-                    string DECm = param[8];
-                    string DECs = param[9];
+
+                    int RAh = int.Parse(param[4]);
+                    int RAm = int.Parse(param[5]);
+                    double RAs = double.Parse(param[6]);
+
+                    int DECh = int.Parse(param[7]);
+                    int DECm = int.Parse(param[8]);
+                    double DECs = double.Parse(param[9]);
+                    
+                    framingAssistantVM.RAHours = RAh;
+                    framingAssistantVM.RAMinutes = RAm;
+                    framingAssistantVM.RASeconds = RAs;
+                    framingAssistantVM.DecDegrees = DECh;
+                    framingAssistantVM.DecMinutes = DECm;
+                    framingAssistantVM.DecSeconds = DECs;     
+                    
+                    
 
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
