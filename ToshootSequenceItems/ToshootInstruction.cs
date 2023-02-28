@@ -159,20 +159,26 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     string[] param = ligne.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     // Écrire les mots dans les variables
+
+                    //nom du champ
                     string namech = param[0];
 
+                    //coordonnées RA champ
                     int RAh = int.Parse(param[4]);
                     int RAm = int.Parse(param[5]);
                     double RAs = double.Parse(param[6]);
 
+                    //coordonnées DEC champ
                     int DECd = int.Parse(param[7]);
                     int DECm = int.Parse(param[8]);
                     double DECs = double.Parse(param[9]);
-                    
+
+                    //envoie variable RA champ à nina
                     framingAssistantVM.RAHours = RAh;
                     framingAssistantVM.RAMinutes = RAm;
                     framingAssistantVM.RASeconds = RAs;
 
+                    //envoie variable RA champ à nina
                     framingAssistantVM.DecDegrees = DECd;
                     framingAssistantVM.DecMinutes = DECm;
                     framingAssistantVM.DecSeconds = DECs;                     
