@@ -57,7 +57,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     [ExportMetadata("Category", "Toshoot")]
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
-    public class ToshootInstruction : SequenceItem {
+    public class ToshootInstruction : SequenceItem, ISequenceItem{
         private  IFramingAssistantVM framingAssistantVM;
         
 
