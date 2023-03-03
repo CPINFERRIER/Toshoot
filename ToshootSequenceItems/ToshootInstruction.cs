@@ -37,6 +37,7 @@ using System.Xml.Linq;
 using NINA.Equipment.Equipment.MyCamera;
 using NINA.WPF.Base.SkySurvey;
 using System.Security.Cryptography;
+using NINA.Sequencer.Interfaces.Mediator;
 
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
@@ -59,7 +60,8 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     [JsonObject(MemberSerialization.OptIn)]
     public class ToshootInstruction : SequenceItem, ISequenceItem{
         private  IFramingAssistantVM framingAssistantVM;
-        
+        private ISequenceMediator sequenceMediator;
+                
 
         /// <summary>
         /// The constructor marked with [ImportingConstructor] will be used to import and construct the object
@@ -92,11 +94,12 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         ///     - IList<IDateTimeProvider>
         /// </remarks>
         [ImportingConstructor]
-        public ToshootInstruction(IFramingAssistantVM framingAssistantVM) {
+        public ToshootInstruction(IFramingAssistantVM framingAssistantVM, ISequenceMediator sequenceMediator) {
             this.framingAssistantVM = framingAssistantVM;
+            this.sequenceMediator = sequenceMediator;
             Text = Settings.Default.DefaultNotificationMessage;            
         }
-        public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM) {
+        public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator) {
             CopyMetaData(copyMe);
         }
 
@@ -181,8 +184,10 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //envoie variable RA champ à nina
                     framingAssistantVM.DecDegrees = DECd;
                     framingAssistantVM.DecMinutes = DECm;
-                    framingAssistantVM.DecSeconds = DECs;                     
+                    framingAssistantVM.DecSeconds = DECs;
+
                     
+
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "ShootOK/" + fileName, namech);
