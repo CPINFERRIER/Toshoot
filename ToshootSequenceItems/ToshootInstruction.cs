@@ -39,6 +39,7 @@ using NINA.WPF.Base.SkySurvey;
 using System.Security.Cryptography;
 using NINA.Sequencer.Interfaces.Mediator;
 using NINA.Sequencer.Container;
+using System.ComponentModel;
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -199,11 +200,10 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     //format pour sequenceur simple
                     IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
-
+                                        
                     //envoie dans sequenceur simple
                     sequenceMediator.AddSimpleTarget(deepSkyObject);
-
-
+                   
 
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
