@@ -162,7 +162,8 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     // Découper la ligne en utilisant la méthode Split
                     string[] param = ligne.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    // Écrire les mots dans les variables
+                    // effacer les champs 
+                                     
 
                     //nom du champ
                     string namech = param[0];
@@ -172,8 +173,10 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     int RAm = int.Parse(param[5]);
                     double RAs = double.Parse(param[6]);
 
+                    //convertis les champs en une valeur degree
                     double ra = (RAh + (RAm / 60.0) + (RAs / 3600.0)) * 15.0;
 
+                    //renvoie l'angle en degree'
                     Angle raok = Angle.ByDegree(ra);
 
                     //coordonnées DEC champ
@@ -181,19 +184,23 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     int DECm = int.Parse(param[8]);
                     double DECs = double.Parse(param[9]);
 
+                    //recherche le signe devant la dec + ou -
                     double signe = Math.Sign(DECd);
 
+                    //convertis les champs en une valeur en degree
                     double dec = signe * (Math.Abs(DECd) + (DECm / 60.0) + (DECs / 3600.0));
 
-                    
+                    //renvoie l'angle en degree
                     Angle decok = Angle.ByDegree(dec);
 
 
-
+                    //renvoie les coordonness ra + dec
                     Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
 
+                    //format pour sequenceur simple
                     IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
 
+                    //envoie dans sequenceur simple
                     sequenceMediator.AddSimpleTarget(deepSkyObject);
 
 
