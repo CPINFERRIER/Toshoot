@@ -178,7 +178,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     double DECs = double.Parse(param[9]);
 
                    
-                    IDeepSkyObject deepSkyObject = new DeepSkyObject(namech, null, null, null);
+                    IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, null, null, null);
 
                     sequenceMediator.AddSimpleTarget(deepSkyObject);
 
