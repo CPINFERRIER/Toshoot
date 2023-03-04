@@ -181,10 +181,11 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     int DECm = int.Parse(param[8]);
                     double DECs = double.Parse(param[9]);
 
-                    double signe = (DECd < 0) ? -1 : 1;
+                    double signe = Math.Sign(DECd);
+
                     double dec = signe * (Math.Abs(DECd) + (DECm / 60.0) + (DECs / 3600.0));
 
-                    //double dec = DECd - (DECd < 0 ? -1 : 1) * DECm / 60.0 - (DECd < 0 ? -1 : 1) * DECs / 3600.0;
+                    
                     Angle decok = Angle.ByDegree(dec);
 
 
