@@ -61,6 +61,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     public class ToshootInstruction : SequenceItem, ISequenceItem{
         private  IFramingAssistantVM framingAssistantVM;
         private ISequenceMediator sequenceMediator;
+        private IDeepSkyObject deepSkyObject;
                 
 
         /// <summary>
@@ -111,8 +112,8 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         /// </remarks>
         [JsonProperty]
         public string Text { get; set; }
-        
 
+        
         /// <summary>
         /// The core logic when the sequence item is running resides here
         /// Add whatever action is necessary
@@ -176,17 +177,12 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     int DECm = int.Parse(param[8]);
                     double DECs = double.Parse(param[9]);
 
-                    //envoie variable RA champ à nina
-                    framingAssistantVM.RAHours = RAh;
-                    framingAssistantVM.RAMinutes = RAm;
-                    framingAssistantVM.RASeconds = RAs;
+                   
+                    IDeepSkyObject deepSkyObject = new DeepSkyObject(namech, null, null, null);
 
-                    //envoie variable RA champ à nina
-                    framingAssistantVM.DecDegrees = DECd;
-                    framingAssistantVM.DecMinutes = DECm;
-                    framingAssistantVM.DecSeconds = DECs;
+                    sequenceMediator.AddSimpleTarget(deepSkyObject);
 
-                    
+
 
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
