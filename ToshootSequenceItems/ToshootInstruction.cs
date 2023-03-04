@@ -38,7 +38,7 @@ using NINA.Equipment.Equipment.MyCamera;
 using NINA.WPF.Base.SkySurvey;
 using System.Security.Cryptography;
 using NINA.Sequencer.Interfaces.Mediator;
-
+using NINA.Sequencer.Container;
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -167,18 +167,28 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //nom du champ
                     string namech = param[0];
 
-                    //coordonnées RA champ
+                    //coordonnées RA champ 
                     int RAh = int.Parse(param[4]);
                     int RAm = int.Parse(param[5]);
                     double RAs = double.Parse(param[6]);
+
+                    double ra = (RAh + (RAm / 60) + (RAs / 3600.0)) * 15.0;
+
+                    Angle raok = Angle.ByDegree(ra);
 
                     //coordonnées DEC champ
                     int DECd = int.Parse(param[7]);
                     int DECm = int.Parse(param[8]);
                     double DECs = double.Parse(param[9]);
 
-                   
-                    IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, null, null, null);
+                    double dec = DECd - (DECd < 0 ? -1 : 1) * DECm / 60 - (DECd < 0 ? -1 : 1) * DECs / 3600.0;
+                    Angle decok = Angle.ByDegree(dec);
+
+
+
+                    Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
+
+                    IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
 
                     sequenceMediator.AddSimpleTarget(deepSkyObject);
 
