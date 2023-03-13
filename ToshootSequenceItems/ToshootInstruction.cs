@@ -40,6 +40,13 @@ using System.Security.Cryptography;
 using NINA.Sequencer.Interfaces.Mediator;
 using NINA.Sequencer.Container;
 using System.ComponentModel;
+using NINA.Profile;
+using NINA.Sequencer;
+using NINA.WPF.Base.Mediator;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using Namotion.Reflection;
+using Google.Protobuf;
+using NINA.Sequencer.DragDrop;
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -58,12 +65,22 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     [ExportMetadata("Icon", "Plugin_Test_SVG")]
     [ExportMetadata("Category", "Toshoot")]
     [Export(typeof(ISequenceItem))]
+    [Export(typeof(ISequenceContainer))]
     [JsonObject(MemberSerialization.OptIn)]
     public class ToshootInstruction : SequenceItem, ISequenceItem{
         private  IFramingAssistantVM framingAssistantVM;
         private ISequenceMediator sequenceMediator;
         private IDeepSkyObject deepSkyObject;
-                
+        private IDeepSkyObjectContainer deepSkyObjectContainer;
+        private INighttimeCalculator nighttimeCalculator;
+        private IProfileService profileService;
+        private IApplicationMediator applicationMediator;
+        private IPlanetariumFactory planetariumFactory;
+        private ICameraMediator cameraMediator;
+        private IFilterWheelMediator filterWheelMediator;
+       
+        
+
 
         /// <summary>
         /// The constructor marked with [ImportingConstructor] will be used to import and construct the object
@@ -96,14 +113,25 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         ///     - IList<IDateTimeProvider>
         /// </remarks>
         [ImportingConstructor]
-        public ToshootInstruction(IFramingAssistantVM framingAssistantVM, ISequenceMediator sequenceMediator) {
+        public ToshootInstruction(IFramingAssistantVM framingAssistantVM, ISequenceMediator sequenceMediator, INighttimeCalculator nighttimeCalculator, IProfileService profileService, IApplicationMediator applicationMediator, IPlanetariumFactory planetariumFactory, ICameraMediator cameraMediator, IFilterWheelMediator filterWheelMediator) {
             this.framingAssistantVM = framingAssistantVM;
             this.sequenceMediator = sequenceMediator;
-            Text = Settings.Default.DefaultNotificationMessage;            
+            this.nighttimeCalculator = nighttimeCalculator;
+            Text = Properties.Settings.Default.DefaultNotificationMessage;
+            this.profileService = profileService;   
+            this.applicationMediator = applicationMediator;
+            this.planetariumFactory = planetariumFactory;
+            this.cameraMediator = cameraMediator;
+            this.filterWheelMediator = filterWheelMediator;
+            
+
+
         }
-        public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator) {
+        public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator, copyMe.nighttimeCalculator, copyMe.profileService, copyMe.applicationMediator, copyMe.planetariumFactory, copyMe.cameraMediator, copyMe.filterWheelMediator) {
             CopyMetaData(copyMe);
         }
+
+        
 
         /// <summary>
         /// An example property that can be set from the user interface via the Datatemplate specified in PluginTestItem.Template.xaml
@@ -113,8 +141,9 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         /// </remarks>
         [JsonProperty]
         public string Text { get; set; }
+       
 
-        
+
         /// <summary>
         /// The core logic when the sequence item is running resides here
         /// Add whatever action is necessary
@@ -203,7 +232,28 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                                         
                     //envoie dans sequenceur simple
                     sequenceMediator.AddSimpleTarget(deepSkyObject);
-                   
+
+                    double rotation = 0;
+
+                                        
+
+                    IDeepSkyObjectContainer deepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+                    deepSkyObjectContainer.Target.TargetName = namech;
+                    deepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
+                        TargetName = namech,
+                        InputCoordinates = new InputCoordinates() {
+                            Coordinates = coords
+                        },
+                        Rotation = rotation,
+
+
+
+                    };
+
+                    
+                    sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
+
+                    
 
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
@@ -224,11 +274,14 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             return Task.CompletedTask;
         }
 
-        /// <summary>
-        /// When items are put into the sequence via the factory, the factory will call the clone method. Make sure all the relevant fields are cloned with the object.
-        /// </summary>
-        /// <returns></returns>
-        public override object Clone() {
+    /// <summary>
+    /// When items are put into the sequence via the factory, the factory will call the clone method. Make sure all the relevant fields are cloned with the object.
+    /// </summary>
+    /// <returns></returns>
+    /// 
+   
+    public override object Clone() {  
+             
             return new ToshootInstruction(this);
         }
 
