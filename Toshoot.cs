@@ -131,6 +131,15 @@ namespace Cyrilastro.NINA.Toshoot {
                 RaisePropertyChanged();
             }
         }
+        
+        public string DefaultTemplate {
+            get => Settings.Default.DefaultTemplate;
+            set {
+                Settings.Default.DefaultTemplate = value;
+                CoreUtil.SaveSettings(Properties.Settings.Default);
+                RaisePropertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = null) {
