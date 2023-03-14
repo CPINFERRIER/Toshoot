@@ -124,14 +124,18 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             this.cameraMediator = cameraMediator;
             this.filterWheelMediator = filterWheelMediator;
             
-
+            Template = Toshoot.DefaultTemplate;
 
         }
         public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator, copyMe.nighttimeCalculator, copyMe.profileService, copyMe.applicationMediator, copyMe.planetariumFactory, copyMe.cameraMediator, copyMe.filterWheelMediator) {
             CopyMetaData(copyMe);
         }
 
-        
+        private Dispatcher _dispatcher = System.Windows.Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
+        public ICommand OpenFileCommand { get; private set; }
+        public ICommand DropTargetCommand { get; set; }
+        public ICommand LoadTargetCommand { get; set; }
+        public ICommand DeleteTargetCommand { get; set; }
 
         /// <summary>
         /// An example property that can be set from the user interface via the Datatemplate specified in PluginTestItem.Template.xaml
