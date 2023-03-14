@@ -47,6 +47,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using Namotion.Reflection;
 using Google.Protobuf;
 using NINA.Sequencer.DragDrop;
+using System.Windows.Threading;
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -123,20 +124,12 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             this.planetariumFactory = planetariumFactory;
             this.cameraMediator = cameraMediator;
             this.filterWheelMediator = filterWheelMediator;
-            
-            Template = Toshoot.DefaultTemplate;
-
+                        
         }
         public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator, copyMe.nighttimeCalculator, copyMe.profileService, copyMe.applicationMediator, copyMe.planetariumFactory, copyMe.cameraMediator, copyMe.filterWheelMediator) {
             CopyMetaData(copyMe);
         }
-
-        private Dispatcher _dispatcher = System.Windows.Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
-        public ICommand OpenFileCommand { get; private set; }
-        public ICommand DropTargetCommand { get; set; }
-        public ICommand LoadTargetCommand { get; set; }
-        public ICommand DeleteTargetCommand { get; set; }
-
+               
         /// <summary>
         /// An example property that can be set from the user interface via the Datatemplate specified in PluginTestItem.Template.xaml
         /// </summary>
@@ -278,13 +271,15 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             return Task.CompletedTask;
         }
 
-    /// <summary>
-    /// When items are put into the sequence via the factory, the factory will call the clone method. Make sure all the relevant fields are cloned with the object.
-    /// </summary>
-    /// <returns></returns>
-    /// 
-   
-    public override object Clone() {  
+        /// <summary>
+        /// When items are put into the sequence via the factory, the factory will call the clone method. Make sure all the relevant fields are cloned with the object.
+        /// </summary>
+        /// <returns></returns>
+        /// 
+
+        
+
+        public override object Clone() {  
              
             return new ToshootInstruction(this);
         }
