@@ -46,5 +46,7 @@ namespace Cyrilastro.NINA.Toshoot.Properties {
                 this["DefaultNotificationMessage"] = value;
             }
         }
+
+        public string DefaultTemplate { get; set; }
     }
 }
