@@ -247,7 +247,9 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     };
 
-                    
+                    deepSkyObjectContainer.Target.TargetName = new InputTarget(namech)
+                    deepSkyObjectContainer.Target.InputCoordinates = new InputCoordinates(coords)
+
                     sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
 
                     
