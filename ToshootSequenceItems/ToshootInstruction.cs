@@ -79,7 +79,6 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         private IPlanetariumFactory planetariumFactory;
         private ICameraMediator cameraMediator;
         private IFilterWheelMediator filterWheelMediator;
-        private ISequenceContainer sequenceContainer;
         
 
 
@@ -250,7 +249,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     deepSkyObjectContainer.Target.TargetName = new InputTarget(namech)
                     deepSkyObjectContainer.Target.InputCoordinates = new InputCoordinates(coords)
 
-                    sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
+                    //sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
 
                     
 
