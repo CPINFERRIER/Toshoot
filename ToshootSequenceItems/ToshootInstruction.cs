@@ -227,7 +227,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
                                         
                     //envoie dans sequenceur simple
-                    sequenceMediator.AddSimpleTarget(deepSkyObject);
+                    //sequenceMediator.AddSimpleTarget(deepSkyObject);
 
                     double rotation = 0;
 
