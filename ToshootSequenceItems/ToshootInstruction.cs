@@ -79,7 +79,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         private IPlanetariumFactory planetariumFactory;
         private ICameraMediator cameraMediator;
         private IFilterWheelMediator filterWheelMediator;
-       
+        private ISequenceContainer sequenceContainer;
         
 
 
