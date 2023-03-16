@@ -49,6 +49,7 @@ using Google.Protobuf;
 using NINA.Sequencer.DragDrop;
 using System.Windows.Threading;
 
+
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
     /// This Class shows the basic principle on how to add a new Sequence Instruction to the N.I.N.A. sequencer via the plugin interface
@@ -79,8 +80,10 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         private IPlanetariumFactory planetariumFactory;
         private ICameraMediator cameraMediator;
         private IFilterWheelMediator filterWheelMediator;
-       
-        
+
+        private InputTarget target;
+
+
 
 
         /// <summary>
@@ -129,6 +132,8 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator, copyMe.nighttimeCalculator, copyMe.profileService, copyMe.applicationMediator, copyMe.planetariumFactory, copyMe.cameraMediator, copyMe.filterWheelMediator) {
             CopyMetaData(copyMe);
         }
+
+        
                
         /// <summary>
         /// An example property that can be set from the user interface via the Datatemplate specified in PluginTestItem.Template.xaml
@@ -138,7 +143,8 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         /// </remarks>
         [JsonProperty]
         public string Text { get; set; }
-       
+        
+
 
 
         /// <summary>
@@ -228,15 +234,16 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
                                         
                     //envoie dans sequenceur simple
-                    sequenceMediator.AddSimpleTarget(deepSkyObject);
+                    //sequenceMediator.AddSimpleTarget(deepSkyObject);
 
                     double rotation = 0;
 
                                         
 
-                    IDeepSkyObjectContainer deepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
-                    deepSkyObjectContainer.Target.TargetName = namech;
-                    deepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
+                    //IDeepSkyObjectContainer dsoContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+
+
+                    dsoContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
                         TargetName = namech,
                         InputCoordinates = new InputCoordinates() {
                             Coordinates = coords
@@ -247,10 +254,13 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     };
 
-                    
-                    sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
 
                     
+                    
+
+                    //sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
+
+
 
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
