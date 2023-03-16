@@ -245,11 +245,15 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
                     };
-
+                    //tester ça
                     deepSkyObjectContainer.Target.TargetName = new InputTarget(namech)
                     deepSkyObjectContainer.Target.InputCoordinates = new InputCoordinates(coords)
+                    
+                    // ou tester ça
+                    //dsoContainer.Target.TargetName = new InputTarget(namech)
+                    //dsoContainer.Target.InputCoordinates = new InputCoordinates(coords)
 
-                    //sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
+                    //si marche pas ici, le coller dans IDeepSkyObjectContainer
 
                     
 
