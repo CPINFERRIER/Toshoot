@@ -252,12 +252,8 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
                     };
-
+                                       
                     
-                    sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
-
-
-
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "ShootOK/" + fileName, namech);
