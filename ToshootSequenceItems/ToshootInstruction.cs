@@ -252,7 +252,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
 
-                    };
+                    }; 
 
 
                     
