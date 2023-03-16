@@ -85,7 +85,6 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
 
-
         /// <summary>
         /// The constructor marked with [ImportingConstructor] will be used to import and construct the object
         /// General device interfaces can be added to the constructor parameters and will be automatically injected on instantiation by the plugin loader
@@ -252,13 +251,10 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
 
-                    }; 
-
+                    };
 
                     
-                    
-
-                    //sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
+                    sequenceMediator.AddAdvancedTarget(deepSkyObjectContainer);
 
 
 
