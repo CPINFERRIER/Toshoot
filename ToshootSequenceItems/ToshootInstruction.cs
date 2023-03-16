@@ -146,6 +146,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
 
+
         /// <summary>
         /// The core logic when the sequence item is running resides here
         /// Add whatever action is necessary
@@ -230,7 +231,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
 
                     //format pour sequenceur simple
-                    IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
+                    //IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
                                         
                     //envoie dans sequenceur simple
                     //sequenceMediator.AddSimpleTarget(deepSkyObject);
@@ -239,21 +240,25 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                                         
 
-                    IDeepSkyObjectContainer dsoContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+                    IDeepSkyObjectContainer DSOContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
 
 
-                    dsoContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
-                        TargetName = namech,
-                        InputCoordinates = new InputCoordinates() {
-                            Coordinates = coords
-                        },
-                        Rotation = rotation,
+                   // DSOContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
+                   //     TargetName = namech,
+                   //     InputCoordinates = new InputCoordinates() {
+                   //         Coordinates = coords
+                   //     },
+                   //     Rotation = rotation,
 
 
 
-                    };
-                                       
-                    
+                   //};
+
+                    DSOContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon);
+                    DSOContainer.Target.InputCoordinates = new InputCoordinates(coords);
+                    DSOContainer.Target.TargetName = namech;
+
+
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "ShootOK/" + fileName, namech);
