@@ -236,18 +236,15 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //envoie dans sequenceur simple
                     //sequenceMediator.AddSimpleTarget(deepSkyObject);
 
-                    double rotation = 0;
+                    //double rotation = 0;
 
                                       
 
                     IDeepSkyObjectContainer DSOContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
                     
                     DSOContainer.Target.InputCoordinates = new InputCoordinates(coords);
-                    DSOContainer.Target.TargetName = namech;
-                    DSOContainer.Target.Rotation = rotation;
-                    
-                    
-
+                    DSOContainer.Target.TargetName = namech;                                    
+                                       
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "ShootOK/" + fileName, namech);
