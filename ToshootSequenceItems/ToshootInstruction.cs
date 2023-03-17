@@ -73,7 +73,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         private  IFramingAssistantVM framingAssistantVM;
         private ISequenceMediator sequenceMediator;
         private IDeepSkyObject deepSkyObject;
-        public IDeepSkyObjectContainer deepSkyObjectContainer;
+        public DeepSkyObjectContainer DeepSkyObjectContainer;
         private INighttimeCalculator nighttimeCalculator;
         private IProfileService profileService;
         private IApplicationMediator applicationMediator;
@@ -82,6 +82,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         private IFilterWheelMediator filterWheelMediator;
 
         public InputTarget Target { get; set; }
+        
 
         
 
@@ -129,6 +130,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             this.cameraMediator = cameraMediator;
             this.filterWheelMediator = filterWheelMediator;
             Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon);
+            DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
         }
         public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator, copyMe.nighttimeCalculator, copyMe.profileService, copyMe.applicationMediator, copyMe.planetariumFactory, copyMe.cameraMediator, copyMe.filterWheelMediator) {
             CopyMetaData(copyMe);
@@ -239,10 +241,10 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //double rotation = 0;
                                                           
 
-                    IDeepSkyObjectContainer DSOContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+                     
                     
-                    DSOContainer.Target.InputCoordinates = new InputCoordinates(coords);
-                    DSOContainer.Target.TargetName = namech;                                    
+                    DeepSkyObjectContainer.Target.InputCoordinates = new InputCoordinates(coords);
+                    DeepSkyObjectContainer.Target.TargetName = namech;                                    
                                        
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
