@@ -237,8 +237,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //sequenceMediator.AddSimpleTarget(deepSkyObject);
 
                     //double rotation = 0;
-
-                                      
+                                                          
 
                     IDeepSkyObjectContainer DSOContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
                     
