@@ -49,22 +49,7 @@
 
     <!--  The definition of the plugin test condition style  -->
     <!--  The DataType has to be defined as the instruction in context  -->
-    <DataTemplate DataType="{x:Type local:ToshootCondition}">
-        <nina:SequenceBlockView>
-            <nina:SequenceBlockView.SequenceItemContent>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" Text="Is truthy" />
-
-                    <CheckBox
-                        MinWidth="40"
-                        Margin="5,0,0,0"
-                        VerticalAlignment="Center"
-                        IsChecked="{Binding IsTruthy}" />
-                </StackPanel>
-            </nina:SequenceBlockView.SequenceItemContent>
-        </nina:SequenceBlockView>
-    </DataTemplate>
-
+    
     <!--  The definition of the test condition plugin style in the mini format on the imaging tab  -->
     <!--  The Key has to be defined as the fully qualified instruction name and the "_Mini" postfix  -->
     <DataTemplate x:Key="Cyrilastro.NINA.Toshoot.ToshootTestCategory.ToshootCondition_Mini">

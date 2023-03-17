@@ -268,8 +268,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Toshoot.cs" />
-    <Compile Include="ToshootSequenceItems\ToshootCondition.cs" />
-    <Compile Include="ToshootSequenceItems\ToshootTrigger.cs" />
     <Compile Include="Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>

@@ -62,7 +62,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     ///
     /// If the item has some preconditions that should be validated, it shall also extend the IValidatable interface and add the validation logic accordingly.
     /// </summary>
-    [ExportMetadata("Name", "ToShoot Instruction")]
+    [ExportMetadata("Name", "ToShoot")]
     [ExportMetadata("Description", "This item will just show a notification and is just there to show how the plugin system works")]
     [ExportMetadata("Icon", "Plugin_Test_SVG")]
     [ExportMetadata("Category", "Toshoot")]
@@ -73,7 +73,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         private  IFramingAssistantVM framingAssistantVM;
         private ISequenceMediator sequenceMediator;
         private IDeepSkyObject deepSkyObject;
-        private IDeepSkyObjectContainer deepSkyObjectContainer;
+        public IDeepSkyObjectContainer deepSkyObjectContainer;
         private INighttimeCalculator nighttimeCalculator;
         private IProfileService profileService;
         private IApplicationMediator applicationMediator;
@@ -196,9 +196,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     // Découper la ligne en utilisant la méthode Split
                     string[] param = ligne.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    // effacer les champs 
-                                     
+                                                                        
 
                     //nom du champ
                     string namech = param[0];
@@ -246,8 +244,9 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     
                     DSOContainer.Target.InputCoordinates = new InputCoordinates(coords);
                     DSOContainer.Target.TargetName = namech;
-                    DSOContainer.Target.Rotation = rotation;                   
-                                     
+                    DSOContainer.Target.Rotation = rotation;
+                    
+                    
 
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
