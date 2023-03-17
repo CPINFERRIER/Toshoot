@@ -81,7 +81,9 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         private ICameraMediator cameraMediator;
         private IFilterWheelMediator filterWheelMediator;
 
-        private InputTarget target;
+        public InputTarget Target { get; set; }
+
+        
 
 
 
@@ -126,7 +128,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             this.planetariumFactory = planetariumFactory;
             this.cameraMediator = cameraMediator;
             this.filterWheelMediator = filterWheelMediator;
-                        
+            Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon);
         }
         public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator, copyMe.nighttimeCalculator, copyMe.profileService, copyMe.applicationMediator, copyMe.planetariumFactory, copyMe.cameraMediator, copyMe.filterWheelMediator) {
             CopyMetaData(copyMe);
@@ -231,32 +233,23 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
 
                     //format pour sequenceur simple
-                    //IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
+                    //IDeepSkyObject DSOContainer = new DeepSkyObject(Name = namech, coords, null, null);
                                         
                     //envoie dans sequenceur simple
                     //sequenceMediator.AddSimpleTarget(deepSkyObject);
 
                     double rotation = 0;
 
-                                        
+                                      
 
                     IDeepSkyObjectContainer DSOContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
-
-
-                   // DSOContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
-                   //     TargetName = namech,
-                   //     InputCoordinates = new InputCoordinates() {
-                   //         Coordinates = coords
-                   //     },
-                   //     Rotation = rotation,
-
-
-
-                   //};
-
-                    DSOContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon);
+                    
                     DSOContainer.Target.InputCoordinates = new InputCoordinates(coords);
                     DSOContainer.Target.TargetName = namech;
+                    DSOContainer.Target.Rotation = rotation;
+                    
+
+                    
 
 
                     //crée le fichier text de suivi de la soirée
