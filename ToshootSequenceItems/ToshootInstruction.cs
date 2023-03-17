@@ -246,11 +246,8 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     
                     DSOContainer.Target.InputCoordinates = new InputCoordinates(coords);
                     DSOContainer.Target.TargetName = namech;
-                    DSOContainer.Target.Rotation = rotation;
-                    
-
-                    
-
+                    DSOContainer.Target.Rotation = rotation;                   
+                                     
 
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
