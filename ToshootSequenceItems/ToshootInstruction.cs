@@ -130,8 +130,6 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             this.planetariumFactory = planetariumFactory;
             this.cameraMediator = cameraMediator;
             this.filterWheelMediator = filterWheelMediator;
-            Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon);
-            DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
             
         }
         public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator, copyMe.nighttimeCalculator, copyMe.profileService, copyMe.applicationMediator, copyMe.planetariumFactory, copyMe.cameraMediator, copyMe.filterWheelMediator) {
@@ -148,7 +146,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         /// </remarks>
         [JsonProperty]
         public string Text { get; set; }
-        
+       
 
 
 
@@ -243,9 +241,12 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //double rotation = 0;                                                       
 
                     
-                    DeepSkyObjectContainer deepSkyObjectContainer = DeepSkyObjectContainer;
-                    deepSkyObjectContainer.Target.InputCoordinates = new InputCoordinates(coords);
-                    deepSkyObjectContainer.Target.TargetName = namech;                    
+                    DeepSkyObjectContainer deepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+                    deepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) { 
+                    InputCoordinates = new InputCoordinates(coords),
+                    TargetName = namech,
+                    };
+                    
                     
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
