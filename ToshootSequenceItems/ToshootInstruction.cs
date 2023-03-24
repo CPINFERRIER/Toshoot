@@ -52,6 +52,7 @@ using Accord.IO;
 using System.Net.PeerToPeer.Collaboration;
 using System.Windows.Media;
 using System.Windows.Data;
+using Nito.Mvvm;
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -134,7 +135,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             this.planetariumFactory = planetariumFactory;
             this.cameraMediator = cameraMediator;
             this.filterWheelMediator = filterWheelMediator;
-            //Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon);
+            
             
 
         }
@@ -260,13 +261,14 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     deepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
 
                         InputCoordinates = new InputCoordinates(coords),
-                        TargetName = namech,
+                        TargetName = namech,                   
+                       
 
                     };
 
-                    RaisePropertyChanged();
 
-                   
+
+                    
 
                                        
                     
