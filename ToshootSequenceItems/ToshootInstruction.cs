@@ -264,7 +264,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     };
 
-                    RaisePropertyChanged(Target.TargetName);
+                   
 
                                        
                     
