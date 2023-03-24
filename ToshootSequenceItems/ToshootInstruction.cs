@@ -77,7 +77,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         private  IFramingAssistantVM framingAssistantVM;
         private ISequenceMediator sequenceMediator;
         private IDeepSkyObject deepSkyObject;
-        public IDeepSkyObjectContainer deepSkyObjectContainer;
+        //public IDeepSkyObjectContainer deepSkyObjectContainer;
         private ISequenceContainer sequenceContainer;
         private INighttimeCalculator nighttimeCalculator;
         private IProfileService profileService;
@@ -256,9 +256,9 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
 
-                    IDeepSkyObjectContainer deepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+                    DeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
 
-                    deepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
+                    DeepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
 
                         InputCoordinates = new InputCoordinates(coords),
                         TargetName = namech,                   
