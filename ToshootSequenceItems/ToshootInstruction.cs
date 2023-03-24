@@ -268,13 +268,6 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
 
-                    
-
-                                       
-                    
-
-                    
-
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "ShootOK/" + fileName, namech);
@@ -292,7 +285,10 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             }
 
             return Task.CompletedTask;
+            
         }
+
+        
 
         /// <summary>
         /// When items are put into the sequence via the factory, the factory will call the clone method. Make sure all the relevant fields are cloned with the object.
