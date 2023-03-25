@@ -71,14 +71,14 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     [ExportMetadata("Icon", "Plugin_Test_SVG")]
     [ExportMetadata("Category", "Toshoot")]
     [Export(typeof(ISequenceItem))]
-    [Export(typeof(ISequenceContainer))]
+    //[Export(typeof(ISequenceContainer))]
     [JsonObject(MemberSerialization.OptIn)]
     public class ToshootInstruction : SequenceItem, ISequenceItem{
         private  IFramingAssistantVM framingAssistantVM;
-        private ISequenceMediator sequenceMediator;
+        public ISequenceMediator sequenceMediator;
         private IDeepSkyObject deepSkyObject;
-        //public IDeepSkyObjectContainer deepSkyObjectContainer;
-        private ISequenceContainer sequenceContainer;
+        public IDeepSkyObjectContainer deepSkyObjectContainer;
+        public ISequenceContainer sequenceContainer;
         private INighttimeCalculator nighttimeCalculator;
         private IProfileService profileService;
         private IApplicationMediator applicationMediator;
@@ -256,17 +256,17 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
 
 
-                    DeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+                    IDeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
 
                     DeepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
-
-                        InputCoordinates = new InputCoordinates(coords),
-                        TargetName = namech,                   
-                       
-
-                    };
-
-
+                        Expanded = true,
+                        TargetName = namech,
+                        Rotation = 0.0,
+                        InputCoordinates = new InputCoordinates(coords),                                                               
+                                               
+                    };                                                                    
+                                    
+                    
 
                     //crée le fichier text de suivi de la soirée
                     string fileName = namech + ".txt";
