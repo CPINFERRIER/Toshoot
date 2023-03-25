@@ -75,24 +75,19 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     [JsonObject(MemberSerialization.OptIn)]
     public class ToshootInstruction : SequenceItem, ISequenceItem{
         private  IFramingAssistantVM framingAssistantVM;
-        public ISequenceMediator sequenceMediator;
-        private IDeepSkyObject deepSkyObject;
-        public IDeepSkyObjectContainer deepSkyObjectContainer;
-        public ISequenceContainer sequenceContainer;
+        private ISequenceMediator sequenceMediator;
+        private IDeepSkyObject deepSkyObject;        
+        private ISequenceContainer sequenceContainer;
         private INighttimeCalculator nighttimeCalculator;
         private IProfileService profileService;
         private IApplicationMediator applicationMediator;
         private IPlanetariumFactory planetariumFactory;
         private ICameraMediator cameraMediator;
         private IFilterWheelMediator filterWheelMediator;
-        public DeepSkyObjectContainer DeepSkyObjectContainer;
+        
 
         public InputTarget Target { get; set; }
-        
-
-        
-
-
+                
 
         /// <summary>
         /// The constructor marked with [ImportingConstructor] will be used to import and construct the object
@@ -135,14 +130,15 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             this.planetariumFactory = planetariumFactory;
             this.cameraMediator = cameraMediator;
             this.filterWheelMediator = filterWheelMediator;
-            
-            
+            Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon);
+
+
 
         }
         public ToshootInstruction(ToshootInstruction copyMe) : this(copyMe.framingAssistantVM, copyMe.sequenceMediator, copyMe.nighttimeCalculator, copyMe.profileService, copyMe.applicationMediator, copyMe.planetariumFactory, copyMe.cameraMediator, copyMe.filterWheelMediator) {
             CopyMetaData(copyMe);
         }
-
+        
         
                
         /// <summary>
@@ -153,14 +149,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         /// </remarks>
         [JsonProperty]
         public string Text { get; set; }
-        public string namech { get; set; }
-        
        
-
-
-
-
-
 
         /// <summary>
         /// The core logic when the sequence item is running resides here
@@ -171,8 +160,10 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
         /// <returns></returns>
         public override Task Execute(IProgress<ApplicationStatus> progress, CancellationToken token) {
             Notification.ShowSuccess(Text);
-            // Add logic to run the item here            
-            // Crée le dossier pour enregistrer le fichier fini
+            // Add logic to run the item here
+
+            //Crée le dossier pour enregistrer le fichier fini
+            //Create the folder to save the finished file
             string folderPath = Text + "ShootOK";
             if (!Directory.Exists(folderPath)) {
                 Directory.CreateDirectory(folderPath);
@@ -182,10 +173,11 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             string directoryPath = Text;
             string[] files = null;
 
-            // Attends jusqu'à ce qu'un fichier "toconf*.txt" apparaisse dans le répertoire spécifié
+            //Attends jusqu'à ce qu'un fichier "toconf*.txt" apparaisse dans le répertoire spécifié
+            //Wait until a file named 'toconf*.txt' appears in the specified directory
             while (files == null || files.Length == 0) {
                 Console.WriteLine("En attente d'un fichier toconf*.txt dans le répertoire " + directoryPath);
-                System.Threading.Thread.Sleep(1000); // Attend 1 seconde avant de vérifier à nouveau
+                System.Threading.Thread.Sleep(1000); //Attend 1 seconde avant de vérifier à nouveau //Wait for 1 second before checking again
                 files = Directory.GetFiles(directoryPath, "toconf*.txt");
             }
 
@@ -201,48 +193,63 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                 }
 
                 try {
-                    // Ouvrir le fichier en lecture
+                    //Ouvrir le fichier en lecture
+                    //Open the file for reading
                     string directdoss = closestFile;
                     StreamReader fichier = new StreamReader(directdoss);
-                    // Lire une ligne de texte depuis le fichier
+
+                    //Lire une ligne de texte depuis le fichier
+                    //Read a line of text from the file
                     string ligne = fichier.ReadLine();
 
-                    // Découper la ligne en utilisant la méthode Split
+                    //Découper la ligne en utilisant la méthode Split
+                    //Split the line using the Split method
                     string[] param = ligne.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                                                        
 
-                    //nom du champ
-                    namech = param[0];
 
-                    //coordonnées RA champ 
+                    //Nom du champ
+                    //Field name
+                    string namech = param[0];
+
+                    //Coordonnées RA champ 
+                    //Field RA coordinates
                     int RAh = int.Parse(param[4]);
                     int RAm = int.Parse(param[5]);
                     double RAs = double.Parse(param[6]);
 
-                    //convertis les champs en une valeur degree
+                    //Convertis les champs en une valeur degree
+                    //Convert the fields to a degree value
                     double ra = (RAh + (RAm / 60.0) + (RAs / 3600.0)) * 15.0;
 
-                    //renvoie l'angle en degree'
+                    //Renvoie l'angle en degree
+                    //Return the angle in degrees
                     Angle raok = Angle.ByDegree(ra);
 
-                    //coordonnées DEC champ
+                    //Coordonnées DEC champ
+                    //Field DEC coordinates
                     int DECd = int.Parse(param[7]);
                     int DECm = int.Parse(param[8]);
                     double DECs = double.Parse(param[9]);
 
-                    //recherche le signe devant la dec + ou -
+                    //Recherche le signe devant la dec + ou -
+                    //Look for the sign in front of the DEC, either + or -
                     double signe = Math.Sign(DECd);
 
-                    //convertis les champs en une valeur en degree
+                    //Convertis les champs en une valeur en degree
+                    //Convert the fields to a degree value
                     double dec = signe * (Math.Abs(DECd) + (DECm / 60.0) + (DECs / 3600.0));
 
-                    //renvoie l'angle en degree
+                    //Renvoie l'angle en degree
+                    //Return the angle in degrees
                     Angle decok = Angle.ByDegree(dec);
 
-
-                    //renvoie les coordonness ra + dec
+                    //Renvoie les coordonness ra + dec
+                    //Return the RA and DEC coordinates
                     Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
-                    
+
+
+
+
 
                     //format pour sequenceur simple
                     //IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
@@ -252,30 +259,36 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     //double rotation = 0;                                                       
 
-                    sequenceMediator.SwitchToAdvancedView();
+                    //sequenceMediator.SwitchToAdvancedView();
+
+                    //DeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+
+                    // DeepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
+                    //     Expanded = true,
+                    //    TargetName = namech,
+                    //    Rotation = 0.0,
+                    //    InputCoordinates = new InputCoordinates(coords),
+                    //    DeepSkyObject = deepSkyObject,
+
+                    //};
+
+                    //framingAssistantVM.SetCoordinates((DeepSkyObject)deepSkyObject);
 
 
 
-                    IDeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
 
-                    DeepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
-                        Expanded = true,
-                        TargetName = namech,
-                        Rotation = 0.0,
-                        InputCoordinates = new InputCoordinates(coords),                                                               
-                                               
-                    };                                                                    
-                                    
-                    
 
-                    //crée le fichier text de suivi de la soirée
+                    //Crée le fichier text de suivi de la soirée
+                    //Create the text file for the evening log
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "ShootOK/" + fileName, namech);
 
-                    // Fermer le fichier
+                    //Fermer le fichier
+                    //Close the file
                     fichier.Close();
 
-                    // Supprimer le fichier
+                    //Supprimer le fichier
+                    //Delete the file
                     if (File.Exists(directdoss)) {
                         File.Delete(directdoss);
                     }
