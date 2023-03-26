@@ -38,10 +38,10 @@ using NINA.Equipment.Equipment.MyCamera;
 using NINA.WPF.Base.SkySurvey;
 using System.Security.Cryptography;
 using NINA.Sequencer.Interfaces.Mediator;
-using NINA.Sequencer.Container;
+using NINA.Sequencer;
 using System.ComponentModel;
 using NINA.Profile;
-using NINA.Sequencer;
+using NINA.Sequencer.Container;
 using NINA.WPF.Base.Mediator;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using Namotion.Reflection;
@@ -53,6 +53,8 @@ using System.Net.PeerToPeer.Collaboration;
 using System.Windows.Media;
 using System.Windows.Data;
 using Nito.Mvvm;
+using Datatemplates = NINA.Sequencer.Container.Datatemplates;
+
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -70,8 +72,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     [ExportMetadata("Description", "This item will just show a notification and is just there to show how the plugin system works")]
     [ExportMetadata("Icon", "Plugin_Test_SVG")]
     [ExportMetadata("Category", "Toshoot")]
-    [Export(typeof(ISequenceItem))]
-    //[Export(typeof(ISequenceContainer))]
+    [Export(typeof(ISequenceItem))]    
     [JsonObject(MemberSerialization.OptIn)]
     public class ToshootInstruction : SequenceItem, ISequenceItem{
         private  IFramingAssistantVM framingAssistantVM;
@@ -275,7 +276,12 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //framingAssistantVM.SetCoordinates((DeepSkyObject)deepSkyObject);
 
 
-
+                    Datatemplates datatemplates = new Datatemplates();
+                    
+                    
+                   
+                    
+                    
 
 
                     //Crée le fichier text de suivi de la soirée
