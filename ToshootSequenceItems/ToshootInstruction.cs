@@ -54,7 +54,7 @@ using System.Windows.Media;
 using System.Windows.Data;
 using Nito.Mvvm;
 using Datatemplates = NINA.Sequencer.Container.Datatemplates;
-
+using System.Globalization;
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -212,11 +212,16 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Field name
                     string namech = param[0];
 
+                    string test32 = param[6];
+
+
                     //Coordonnées RA champ 
                     //Field RA coordinates
                     int RAh = int.Parse(param[4]);
                     int RAm = int.Parse(param[5]);
-                    double RAs = double.Parse(param[6]);
+                    double RAs = double.Parse(param[6], CultureInfo.InvariantCulture);
+
+
 
                     //Convertis les champs en une valeur degree
                     //Convert the fields to a degree value
@@ -230,7 +235,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Field DEC coordinates
                     int DECd = int.Parse(param[7]);
                     int DECm = int.Parse(param[8]);
-                    double DECs = double.Parse(param[9]);
+                    double DECs = double.Parse(param[9], CultureInfo.InvariantCulture);
 
                     //Recherche le signe devant la dec + ou -
                     //Look for the sign in front of the DEC, either + or -
@@ -260,18 +265,18 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     //double rotation = 0;                                                       
 
-                    //sequenceMediator.SwitchToAdvancedView();
+                    sequenceMediator.GetDeepSkyObjectContainerTemplates();
 
-                    //DeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
+                    DeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
 
-                    // DeepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
-                    //     Expanded = true,
-                    //    TargetName = namech,
-                    //    Rotation = 0.0,
-                    //    InputCoordinates = new InputCoordinates(coords),
-                    //    DeepSkyObject = deepSkyObject,
+                     DeepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
+                        Expanded = true,
+                        TargetName = namech,
+                        Rotation = 0.0,
+                        InputCoordinates = new InputCoordinates(coords),
+                        DeepSkyObject = deepSkyObject,
 
-                    //};
+                     };               
 
                     //framingAssistantVM.SetCoordinates((DeepSkyObject)deepSkyObject);
 
