@@ -253,20 +253,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Renvoie les coordonness ra + dec
                     //Return the RA and DEC coordinates
                     Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
-
-
-
-
-
-                    //format pour sequenceur simple
-                    //IDeepSkyObject deepSkyObject = new DeepSkyObject(Name = namech, coords, null, null);
-
-                    //envoie dans sequenceur simple
-                    //sequenceMediator.AddSimpleTarget(deepSkyObject);
-
-                    //double rotation = 0;                                                       
-
-                    //sequenceMediator.GetDeepSkyObjectContainerTemplates();
+                                                    
 
                     DeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
 
