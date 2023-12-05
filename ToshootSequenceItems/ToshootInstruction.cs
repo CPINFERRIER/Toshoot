@@ -164,6 +164,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             Notification.ShowSuccess(Text);
             // Add logic to run the item here
 
+
             //Crée le dossier pour enregistrer le fichier fini
             //Create the folder to save the finished file
             string folderPath = Text + "ShootOK";
@@ -174,6 +175,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
             string directoryPath = Text;
             string[] files = null;
+
 
             //Attends jusqu'à ce qu'un fichier "toconf*.txt" apparaisse dans le répertoire spécifié
             //Wait until a file named 'toconf*.txt' appears in the specified directory
@@ -195,14 +197,17 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                 }
 
                 try {
+
                     //Ouvrir le fichier en lecture
                     //Open the file for reading
                     string directdoss = closestFile;
                     StreamReader fichier = new StreamReader(directdoss);
 
+
                     //Lire une ligne de texte depuis le fichier
                     //Read a line of text from the file
                     string ligne = fichier.ReadLine();
+
 
                     //Découper la ligne en utilisant la méthode Split
                     //Split the line using the Split method
@@ -223,14 +228,15 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     double RAs = double.Parse(param[6], CultureInfo.InvariantCulture);
 
 
-
                     //Convertis les champs en une valeur degree
                     //Convert the fields to a degree value
                     double ra = (RAh + (RAm / 60.0) + (RAs / 3600.0)) * 15.0;
 
+
                     //Renvoie l'angle en degree
                     //Return the angle in degrees
                     Angle raok = Angle.ByDegree(ra);
+
 
                     //Coordonnées DEC champ
                     //Field DEC coordinates
@@ -238,21 +244,26 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     int DECm = int.Parse(param[8]);
                     double DECs = double.Parse(param[9], CultureInfo.InvariantCulture);
 
+
                     //Recherche le signe devant la dec + ou -
                     //Look for the sign in front of the DEC, either + or -
                     double signe = Math.Sign(DECd);
+
 
                     //Convertis les champs en une valeur en degree
                     //Convert the fields to a degree value
                     double dec = signe * (Math.Abs(DECd) + (DECm / 60.0) + (DECs / 3600.0));
 
+
                     //Renvoie l'angle en degree
                     //Return the angle in degrees
                     Angle decok = Angle.ByDegree(dec);
 
+
                     //Renvoie les coordonness ra + dec
                     //Return the RA and DEC coordinates
                     Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
+
 
                     //Ecrit less valeurs dans le DSO de nina
                     //Write fewer values into the NINA DSO
@@ -262,22 +273,21 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                             if (dso != null) {                                
                                 dso.Target.InputCoordinates.Coordinates = coords;
                                 dso.Target.TargetName = namech;
-
                             } 
                         }
-                    }
+                    }                                     
                                         
-                    Datatemplates datatemplates = new Datatemplates();
-                    
 
                     //Crée le fichier text de suivi de la soirée
                     //Create the text file for the evening log
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "ShootOK/" + fileName, namech);
 
+
                     //Fermer le fichier
                     //Close the file
                     fichier.Close();
+
 
                     //Supprimer le fichier
                     //Delete the file
