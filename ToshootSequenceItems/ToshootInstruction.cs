@@ -167,7 +167,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
             //Crée le dossier pour enregistrer le fichier fini
             //Create the folder to save the finished file
-            string folderPath = Text + "S";
+            string folderPath = Text + "Sync";
             if (!Directory.Exists(folderPath)) {
                 Directory.CreateDirectory(folderPath);
                 Console.WriteLine(folderPath);
