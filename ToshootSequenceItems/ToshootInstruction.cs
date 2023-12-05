@@ -268,7 +268,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Ecrit less valeurs dans le DSO de nina
                     //Write fewer values into the NINA DSO
                     ISequenceContainer parent = Parent; {
-                        if (parent != null) {
+                        if (parent != null) { 
                             var dso = parent as IDeepSkyObjectContainer;
                             if (dso != null) {                                
                                 dso.Target.InputCoordinates.Coordinates = coords;
