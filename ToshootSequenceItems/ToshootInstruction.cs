@@ -169,7 +169,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
             //Create the folder to save the finished file
             string folderPath = Text + "Sync";
             if (!Directory.Exists(folderPath)) {
-                Directory.CreateDirectory(folderPath);
+                Directory.CreateDirectory(folderPath); 
                 Console.WriteLine(folderPath);
             }
 
