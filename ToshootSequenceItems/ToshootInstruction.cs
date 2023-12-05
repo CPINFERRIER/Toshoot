@@ -178,9 +178,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
                     //Nom du champ
                     //Field name
-                    string namech = param[0];
-
-                    string test32 = param[6];
+                    string namech = param[0];            
 
 
                     //Coordonnées RA champ 
