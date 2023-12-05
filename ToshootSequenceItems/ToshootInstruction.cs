@@ -1,61 +1,23 @@
-﻿using Cyrilastro.NINA.Toshoot.Properties;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NINA.Astrometry.Interfaces;
 using NINA.Core.Model;
 using NINA.Core.Utility.Notification;
 using NINA.Sequencer.SequenceItem;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using NINA.Core.Enum;
 using NINA.Profile.Interfaces;
-using NINA.Sequencer.Conditions;
-using NINA.Sequencer.Container.ExecutionStrategy;
-using NINA.Sequencer.Trigger;
-using NINA.Core.Utility;
 using NINA.Astrometry;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 using NINA.WPF.Base.Interfaces.Mediator;
-using NINA.Equipment.Exceptions;
-using NINA.Core.Locale;
 using NINA.Equipment.Interfaces;
 using NINA.WPF.Base.Interfaces.ViewModel;
-using NINA.Sequencer.Interfaces;
-using NINA.Core.Model.Equipment;
 using NINA.Equipment.Interfaces.Mediator;
-using NINA.Sequencer.SequenceItem.Imaging;
-using NINA.Sequencer.Utility;
 using System.IO;
-using System.Windows.Controls;
-using System.Xml.Linq;
-using NINA.Equipment.Equipment.MyCamera;
-using NINA.WPF.Base.SkySurvey;
-using System.Security.Cryptography;
 using NINA.Sequencer.Interfaces.Mediator;
-using NINA.Sequencer;
-using System.ComponentModel;
-using NINA.Profile;
 using NINA.Sequencer.Container;
-using NINA.WPF.Base.Mediator;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
-using Namotion.Reflection;
-using Google.Protobuf;
-using NINA.Sequencer.DragDrop;
-using System.Windows.Threading;
-using Accord.IO;
-using System.Net.PeerToPeer.Collaboration;
-using System.Windows.Media;
-using System.Windows.Data;
-using Nito.Mvvm;
-using Datatemplates = NINA.Sequencer.Container.Datatemplates;
 using System.Globalization;
-using System.Net.PeerToPeer;
+
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -265,7 +227,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
 
 
-                    //Ecrit less valeurs dans le DSO de nina
+                    //Ecrit les valeurs dans le DSO de nina
                     //Write fewer values into the NINA DSO
                     ISequenceContainer parent = Parent; {
                         if (parent != null) { 
