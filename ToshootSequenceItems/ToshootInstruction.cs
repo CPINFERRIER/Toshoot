@@ -253,19 +253,9 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Renvoie les coordonness ra + dec
                     //Return the RA and DEC coordinates
                     Coordinates coords = new Coordinates(raok, decok, Epoch.J2000);
-                                                    
 
-                    DeepSkyObjectContainer DeepSkyObjectContainer = new DeepSkyObjectContainer(profileService, nighttimeCalculator, framingAssistantVM, applicationMediator, planetariumFactory, cameraMediator, filterWheelMediator);
-
-                     DeepSkyObjectContainer.Target = new InputTarget(Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Latitude), Angle.ByDegree(profileService.ActiveProfile.AstrometrySettings.Longitude), profileService.ActiveProfile.AstrometrySettings.Horizon) {
-                        Expanded = true,
-                        TargetName = namech,
-                        Rotation = 0.0,
-                        InputCoordinates = new InputCoordinates(coords),
-                        DeepSkyObject = deepSkyObject,
-
-                     };
-
+                    //Ecrit less valeurs dans le DSO de nina
+                    //Write fewer values into the NINA DSO
                     ISequenceContainer parent = Parent; {
                         if (parent != null) {
                             var dso = parent as IDeepSkyObjectContainer;
