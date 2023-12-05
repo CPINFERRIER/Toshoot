@@ -55,6 +55,7 @@ using System.Windows.Data;
 using Nito.Mvvm;
 using Datatemplates = NINA.Sequencer.Container.Datatemplates;
 using System.Globalization;
+using System.Net.PeerToPeer;
 
 namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     /// <summary>
@@ -276,18 +277,21 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                         InputCoordinates = new InputCoordinates(coords),
                         DeepSkyObject = deepSkyObject,
 
-                     };               
+                     };
 
-                    //framingAssistantVM.SetCoordinates((DeepSkyObject)deepSkyObject);
+                    ISequenceContainer parent = Parent; {
+                        if (parent != null) {
+                            var dso = parent as IDeepSkyObjectContainer;
+                            if (dso != null) {                                
+                                dso.Target.InputCoordinates.Coordinates = coords;
+                                dso.Target.TargetName = namech;
 
-
+                            } 
+                        }
+                    }
+                                        
                     Datatemplates datatemplates = new Datatemplates();
                     
-                    
-                   
-                    
-                    
-
 
                     //Crée le fichier text de suivi de la soirée
                     //Create the text file for the evening log
