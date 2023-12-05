@@ -167,7 +167,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
 
             //Crée le dossier pour enregistrer le fichier fini
             //Create the folder to save the finished file
-            string folderPath = Text + "ShootOK";
+            string folderPath = Text + "S";
             if (!Directory.Exists(folderPath)) {
                 Directory.CreateDirectory(folderPath);
                 Console.WriteLine(folderPath);
@@ -281,7 +281,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Crée le fichier text de suivi de la soirée
                     //Create the text file for the evening log
                     string fileName = namech + ".txt";
-                    File.WriteAllText(Text + "ShootOK/" + fileName, namech);
+                    File.WriteAllText(Text + "Sync/" + fileName, namech);
 
 
                     //Fermer le fichier
