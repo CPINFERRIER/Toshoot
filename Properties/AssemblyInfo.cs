@@ -13,15 +13,15 @@ using System.Runtime.InteropServices;
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("Toshoot")]
 // [MANDATORY] A short description of your plugin
-[assembly: AssemblyDescription("permet de faire des observations à la suite")]
+[assembly: AssemblyDescription("Develloper uniquement pour un usage restreint")]
 
 // The following attributes are not required for the plugin per se, but are required by the official manifest meta data
 
 // Your name
-[assembly: AssemblyCompany("CyrilAstro")]
+[assembly: AssemblyCompany("")]
 // The product name that this plugin is part of
 [assembly: AssemblyProduct("Toshoot")]
-[assembly: AssemblyCopyright("Copyright © 2023 CyrilAstro")]
+[assembly: AssemblyCopyright("Copyright © 2023")]
 
 // The minimum Version of N.I.N.A. that this plugin is compatible with
 [assembly: AssemblyMetadata("MinimumApplicationVersion", "2.0.0.9001")]
@@ -31,18 +31,18 @@ using System.Runtime.InteropServices;
 // The url to the license
 [assembly: AssemblyMetadata("LicenseURL", "https://www.mozilla.org/en-US/MPL/2.0/")]
 // The repository where your pluggin is hosted
-[assembly: AssemblyMetadata("Repository", "https://mypluginsourcerepo.com/project")]
+[assembly: AssemblyMetadata("Repository", "https://github.com/CPINFERRIER/Toshoot")]
 
 // The following attributes are optional for the official manifest meta data
 
 //[Optional] Your plugin homepage URL - omit if not applicaple
-[assembly: AssemblyMetadata("Homepage", "https://mypluginwebsite.com/")]
+[assembly: AssemblyMetadata("Homepage", "https://github.com/CPINFERRIER/Toshoot")]
 
 //[Optional] Common tags that quickly describe your plugin
 [assembly: AssemblyMetadata("Tags", "")]
 
 //[Optional] A link that will show a log of all changes in between your plugin's versions
-[assembly: AssemblyMetadata("ChangelogURL", "https://mypluginsourcerepo.com/project/CHANGELOG.md")]
+[assembly: AssemblyMetadata("ChangelogURL", "https://github.com/CPINFERRIER/Toshoot/commits/master")]
 
 //[Optional] The url to a featured logo that will be displayed in the plugin list next to the name
 [assembly: AssemblyMetadata("FeaturedImageURL", "")]
