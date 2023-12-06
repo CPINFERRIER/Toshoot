@@ -241,8 +241,8 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Crée le fichier text de suivi de la soirée
                     //Create the text file for the evening log
                     string fileName = namech + ".txt";
-                    File.WriteAllText(Text + "Sync/" + fileName, namech);
-                    //File.WriteAllText(Path.Combine(Text, "Sync", fileName), $"{namech} {"   RA "} {ra} {"   DEC "} {dec}");
+                    //File.WriteAllText(Text + "Sync/" + fileName, namech);
+                    File.WriteAllText(Path.Combine(Text, "Sync", fileName), $"{namech} {coords}");
 
 
                     //Fermer le fichier
