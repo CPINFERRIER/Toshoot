@@ -38,7 +38,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
     [Export(typeof(ISequenceItem))]    
     [JsonObject(MemberSerialization.OptIn)]
     public class ToshootInstruction : SequenceItem, ISequenceItem{
-        private  IFramingAssistantVM framingAssistantVM;
+        private IFramingAssistantVM framingAssistantVM;
         private ISequenceMediator sequenceMediator;
         private IDeepSkyObject deepSkyObject;        
         private ISequenceContainer sequenceContainer;
@@ -242,6 +242,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Create the text file for the evening log
                     string fileName = namech + ".txt";
                     File.WriteAllText(Text + "Sync/" + fileName, namech);
+                    //File.WriteAllText(Path.Combine(Text, "Sync", fileName), $"{namech} {"   RA "} {ra} {"   DEC "} {dec}");
 
 
                     //Fermer le fichier
