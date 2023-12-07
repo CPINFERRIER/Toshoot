@@ -180,10 +180,6 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Field name
                     string namech = param[0];
 
-                    //Nom asteroide sur la neocp
-                    //Asteroid name on the NEOCP
-                    string nameneocp = param[11];
-
                     //Coordonnées RA champ 
                     //Field RA coordinates
                     int RAh = int.Parse(param[4]);
@@ -244,7 +240,7 @@ namespace Cyrilastro.NINA.Toshoot.ToshootTestCategory {
                     //Crée le fichier text de suivi de la soirée
                     //Create the text file for the evening log
                     string fileName = namech + ".txt";                    
-                    File.WriteAllText(Path.Combine(Text, "Sync", fileName), $"{namech} {coords} {";"} {nameneocp}");
+                    File.WriteAllText(Path.Combine(Text, "Sync", fileName), $"{namech} {coords}");
 
 
                     //Fermer le fichier
